@@ -2,19 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    // Onsen UIの読み込み
-    <link rel='stylesheet' href='https://cdn.rawgit.com/OnsenUI/OnsenUI/1.3.11/build/css/onsenui.css' />
-    <link rel='stylesheet' href='https://cdn.rawgit.com/OnsenUI/OnsenUI/1.3.11/build/css/onsen-css-components.css' />
+    <title>login</title>
 
-    <script src='https://cdn.rawgit.com/OnsenUI/OnsenUI/1.3.11/build/js/angular/angular.min.js'></script>
-    <script src='https://cdn.rawgit.com/OnsenUI/OnsenUI/1.3.11/build/js/onsenui.min.js'></script>
+    <!--Onsen UIの読み込み-->
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+    <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+
     <script>
         ons.bootstrap();
-
+    </script>
+    <script>
         // ログイン
         var login = function() {
-            var username = document.getElementById('username').value;
+            var mailaddress = document.getElementById('mailaddress').value;
             var password = document.getElementById('password').value;
 
             if (username === 'bob' && password === 'secret') {
@@ -24,6 +25,15 @@
             }
         };
 
+        // 新規登録時の処理
+        var hoge = function(){
+
+        };
+
+        // 登録せずに利用する場合の処理
+        var hogehoge = function(){
+
+        };
     </script>
 </head>
 <body>
@@ -34,13 +44,19 @@
 
         <div style="text-align: center; margin-top: 30px;">
             <p>
-                <ons-input id="username" modifier="underbar" placeholder="Username" float></ons-input>
+                <ons-input id="mailaddress" modifier="underbar" placeholder="メールアドレス" float></ons-input>
             </p>
             <p>
-                <ons-input id="password" modifier="underbar" type="password" placeholder="Password" float></ons-input>
+                <ons-input id="password" modifier="underbar" type="password" placeholder="パスワード" float></ons-input>
             </p>
             <p style="margin-top: 30px;">
-                <ons-button onclick="login()">Sign in</ons-button>
+                <ons-button onclick="login()">ログイン</ons-button>
+            </p>
+            <p style="margin-top: 30px;">
+                <ons-button onclick="hoge()">新規登録</ons-button>
+            </p>
+            <p style="margin-top: 30px;">
+                <ons-button onclick="hogehoge()">登録せずに利用する</ons-button>
             </p>
         </div>
     </ons-page>
