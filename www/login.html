@@ -13,8 +13,8 @@
         ons.bootstrap();
     </script>
     <script>
-        // ログイン
-        var login = function() {
+        // ログイン時の処理s
+        var login = function () {
             var mailaddress = document.getElementById('mailaddress').value;
             var password = document.getElementById('password').value;
 
@@ -26,39 +26,42 @@
         };
 
         // 新規登録時の処理
-        var hoge = function(){
+        // registerへ画面遷移?
+        var hoge = function () {
 
         };
 
         // 登録せずに利用する場合の処理
-        var hogehoge = function(){
+        // homeへ画面遷移?
+        var hogehoge = function () {
 
         };
+
     </script>
 </head>
 <body>
-    <ons-page>
-        <ons-toolbar>
-            <div class="center">THE 川柳 2019</div>
-        </ons-toolbar>
+<ons-page>
+    <ons-toolbar>
+        <div class="center">THE 川柳 2019</div>
+    </ons-toolbar>
 
-        <div style="text-align: center; margin-top: 30px;">
-            <p>
-                <ons-input id="mailaddress" modifier="underbar" placeholder="メールアドレス" float></ons-input>
-            </p>
-            <p>
-                <ons-input id="password" modifier="underbar" type="password" placeholder="パスワード" float></ons-input>
-            </p>
-            <p style="margin-top: 30px;">
-                <ons-button onclick="login()">ログイン</ons-button>
-            </p>
-            <p style="margin-top: 30px;">
-                <ons-button onclick="hoge()">新規登録</ons-button>
-            </p>
-            <p style="margin-top: 30px;">
-                <ons-button onclick="hogehoge()">登録せずに利用する</ons-button>
-            </p>
-        </div>
-    </ons-page>
+    <div style="text-align: center; margin-top: 30px;">
+        <p>
+            <ons-input id="mailaddress" modifier="underbar" placeholder="メールアドレス" float></ons-input>
+        </p>
+        <p>
+            <ons-input id="password" modifier="underbar" type="password" placeholder="パスワード" float></ons-input>
+        </p>
+        <p style="margin-top: 30px;">
+            <ons-button onclick="login()">ログイン</ons-button>
+        </p>
+        <p style="margin-top: 30px;">
+            <ons-button onclick="hoge()">新規登録</ons-button>
+        </p>
+        <p style="margin-top: 30px;">
+            <ons-button onclick="hogehoge()">登録せずに利用する</ons-button>
+        </p>
+    </div>
+</ons-page>
 </body>
 </html>

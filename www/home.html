@@ -1,84 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
+<ons-page id="home">
+    <p style="text-align: center;">
+        home.htmlです!!
+    </p>
 
-    <!--Onsen UIの読み込み-->
-    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
-    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
-    <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+    <!--  右下に筆のアイコンを表示  -->
+    <ons-fab position="bottom right">
+        <ons-icon icon="fa-paint-brush"></ons-icon>
+    </ons-fab>
 
-    <script>
-        ons.bootstrap();
-    </script>
+    <!--    ホーム画面のUI周り-->
+    <!--最新のお題-->
+    <ons-card>
+        <div class="NewTheme">
+            <!--日付は変数-->
+            最新のお題 (5/19~6/1)
+        </div>
 
-</head>
-<body>
-<ons-page>
-    <ons-toolbar>
-        <div class="center">ホーム画面</div>
-    </ons-toolbar>
+        <div class="content">
+            <font size="24">つくし</font>
+        </div>
+    </ons-card>
 
-    <ons-tabbar swipeable position="auto">
-        <ons-tab page="home.html" label="ホーム" icon="fa-home, material:md-home" active>
-        </ons-tab>
-        <ons-tab page="recommend.html" label="オススメ" icon="fa-thumbs-up">
-        </ons-tab>
-        </ons-tab>
-        <ons-tab page="contest.html" label="コンテスト" icon="fa-crown">
-        </ons-tab>
-        </ons-tab>
-        <ons-tab page="favorite.html" label="お気に入り" icon="fa-star" badge="999">
-        </ons-tab>
-        </ons-tab>
-        <ons-tab page="option.html" label="オプション" icon="fa-cog">
-        </ons-tab>
-    </ons-tabbar>
+    <!--前回のお題-->
+    <ons-card>
+        <div class="LastTheme">
+            <!--日付は変数-->
+            前回のお題 (5/5~5/18)
+        </div>
+
+        <div class="content">
+            <font size="24">ゴールデンウィーク</font><br>
+            <font size="10">結果発表</font>
+        </div>
+    </ons-card>
+
 </ons-page>
-
-<template id="home.html">
-    <ons-page id="home">
-        <p style="text-align: center;">
-            This is the home.html.
-        </p>
-        <ons-fab position="bottom right">
-            <ons-icon icon="fa-paint-brush"></ons-icon>
-        </ons-fab>
-    </ons-page>
-</template>
-
-<!--<template id="recommend.html">-->
-<!--    <ons-page id="recommend">-->
-<!--        <p style="text-align: center;">-->
-<!--            This is the recommend.html.-->
-<!--        </p>-->
-<!--    </ons-page>-->
-<!--</template>-->
-
-<!--<template id="contest.html">-->
-<!--    <ons-page id="contest">-->
-<!--        <p style="text-align: center;">-->
-<!--            This is the contest.html.-->
-<!--        </p>-->
-<!--    </ons-page>-->
-<!--</template>-->
-
-<!--<template id="favorite.html">-->
-<!--    <ons-page id="favorite">-->
-<!--        <p style="text-align: center;">-->
-<!--            This is the favorite.html.-->
-<!--        </p>-->
-<!--    </ons-page>-->
-<!--</template>-->
-
-<!--<template id="option.html">-->
-<!--    <ons-page id="option">-->
-<!--        <p style="text-align: center;">-->
-<!--            This is the option.html.-->
-<!--        </p>-->
-<!--    </ons-page>-->
-<!--</template>-->
-
-</body>
-</html>
