@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>register</title>
+
+    <!--Onsen UIの読み込み-->
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+    <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+
+    <script>
+        ons.bootstrap();
+    </script>
+</head>
+<body>
+<ons-page>
+    <ons-toolbar>
+        <div class="center">THE 川柳 2019</div>
+    </ons-toolbar>
+
+    <div style="text-align: center; margin-top: 30px;">
+        <p>
+            <ons-input id="nickname" modifier="underbar" placeholder="ニックネーム" float></ons-input>
+        </p>
+        <p>
+            <ons-input id="mailaddress" modifier="underbar" placeholder="メールアドレス" float></ons-input>
+        </p>
+        <p>
+            <ons-input id="password" modifier="underbar" type="password" placeholder="パスワード" float></ons-input>
+        </p>
+        <p>
+            <ons-input id="repassword" modifier="underbar" type="password" placeholder="パスワード(再入力)" float></ons-input>
+        </p>
+        <p style="margin-top: 30px;">
+            <ons-button onclick="hoge()">登録する</ons-button>
+        </p>
+        <p style="margin-top: 30px;">
+            <ons-button onclick="hogehoge()">登録せずに利用する</ons-button>
+        </p>
+    </div>
+</ons-page>
+</body>
+</html>
