@@ -7,4 +7,4 @@
 typings/
 node_modules
 /.idea/
-/.env.js
+/env.js
