@@ -18,11 +18,15 @@
 
     <script>
         $(function () {
+            // 賞の名前を格納する配列
             var awardArray = ['金賞', '銀賞', '銅賞'];
+            // お題の名前を格納する配列
+            var ThemeArray = ['つくし1', 'つくし2', 'つくし3'];
             var str = ""
+
             for (i = 0; i < 3; i++) {
                 str += "<ons-list-item expandable>\n" +
-                    "お題\n" +
+                    ThemeArray[i] + "\n" +
                     "<div class=\"expandable-content\">\n"
 
                 for (j = 0; j < 3; j++) {
