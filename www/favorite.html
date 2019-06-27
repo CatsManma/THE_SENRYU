@@ -65,6 +65,40 @@
         </div>
     </ons-card>
 
-    <div id="loop"></div>
+    <!--    <div id="loop">-->
+    <!--        <button id="loopbutton" onclick="sample()">loopします</button>-->
+    <!--    </div>-->
+
+    <!--    <script>-->
+    <!--        $(function () {-->
+    <!--            // ページの読み込みが完了した後に実行するコード-->
+    <!--            for (i = 0; i < 3; i++) {-->
+    <!--                $("#loop").append("hoge<br>")-->
+    <!--            }-->
+    <!--        })-->
+
+    <!--    </script>-->
+
+    <div id="test2">
+        <p>aiueo<br></p>
+    </div>
+
+    <script>
+        $(function () {
+            for (i = 0; i < 5; i++) {
+                $("#test2").append("    <ons-card>\n" +
+                    "        <div class=\"theme\">\n" +
+                    "            <!--日付は変数-->\n" +
+                    "            前回のお題 (5/5~5/18)\n" +
+                    "        </div>\n" +
+                    "\n" +
+                    "        <div class=\"content\">\n" +
+                    "            <div class=\"theme_name\">ゴールデンウィーク</div>\n" +
+                    "            <div class=\"theme_sub\">結果発表</div>\n" +
+                    "        </div>\n" +
+                    "    </ons-card>")
+            }
+        })
+    </script>
 
 </ons-page>

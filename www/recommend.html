@@ -10,213 +10,45 @@
 
     <ons-list>
         <ons-list-header>お題</ons-list-header>
-        <ons-list-item expandable>
 
-            <!--1つ目のお題-->
-            つくし
-            <div class="expandable-content">
-                <!--1つ目の俳句-->
-                金賞
-                <ons-card>
-                    <div class="first_line">
-                        ああつくし
-                    </div>
-
-                    <div class="second_line">
-                        つくしだいすき
-                    </div>
-
-                    <div class="third_line">
-                        ああつくし
-                    </div>
-
-                    <div class="post_date">
-                        投稿日時 5/19 12:00
-                    </div>
-                </ons-card>
-
-                <!--2つ目の俳句-->
-                銀賞
-                <ons-card>
-                    <div class="first_line">
-                        ああつくし
-                    </div>
-
-                    <div class="second_line">
-                        つくしだいすき
-                    </div>
-
-                    <div class="third_line">
-                        つくしすき
-                    </div>
-
-                    <div class="post_date">
-                        投稿日時 5/19 12:00
-                    </div>
-                </ons-card>
-
-                <!--3つ目の俳句-->
-                銅賞
-                <ons-card>
-                    <div class="first_line">
-                        ああつくし
-                    </div>
-
-                    <div class="second_line">
-                        つくしだいすき
-                    </div>
-
-                    <div class="third_line">
-                        つくしすき
-                    </div>
-
-                    <div class="post_date">
-                        投稿日時 5/19 12:00
-                    </div>
-                </ons-card>
-
-            </div>
-        </ons-list-item>
-
-        <!--2つ目のexpandable-content-->
-        <ons-list-item expandable>
-            <!--2つ目のお題-->
-            GW
-            <div class="expandable-content">
-                <ons-card>
-                    <div class="first_line">
-                        ああつくし
-                    </div>
-
-                    <div class="second_line">
-                        つくしだいすき
-                    </div>
-
-                    <div class="third_line">
-                        ああつくし
-                    </div>
-
-                    <div class="post_date">
-                        投稿日時 5/19 12:00
-                    </div>
-                </ons-card>
-
-                <!--2つ目の俳句-->
-                <ons-card>
-                    <div class="first_line">
-                        ああつくし
-                    </div>
-
-                    <div class="second_line">
-                        つくしだいすき
-                    </div>
-
-                    <div class="third_line">
-                        つくしすき
-                    </div>
-
-                    <div class="post_date">
-                        投稿日時 5/19 12:00
-                    </div>
-                </ons-card>
-            </div>
-        </ons-list-item>
-
-        <!--2つ目のexpandable-content-->
-        <ons-list-item expandable>
-            <!--2つ目のお題-->
-            GW
-            <div class="expandable-content">
-                <ons-card>
-                    <div class="first_line">
-                        ああつくし
-                    </div>
-
-                    <div class="second_line">
-                        つくしだいすき
-                    </div>
-
-                    <div class="third_line">
-                        ああつくし
-                    </div>
-
-                    <div class="post_date">
-                        投稿日時 5/19 12:00
-                    </div>
-
-                    <div class="post_date">
-                        投稿日時 5/19 12:00
-                    </div>
-                </ons-card>
-
-                <!--2つ目の俳句-->
-                <ons-card>
-                    <div class="first_line">
-                        ああつくし
-                    </div>
-
-                    <div class="second_line">
-                        つくしだいすき
-                    </div>
-
-                    <div class="third_line">
-                        つくしすき
-                    </div>
-
-                    <div class="post_date">
-                        投稿日時 5/19 12:00
-                    </div>
-                </ons-card>
-            </div>
-        </ons-list-item>
-
-<!--        &lt;!&ndash;2つ目のexpandable-content&ndash;&gt;-->
-<!--        <ons-list-item expandable>-->
-<!--            &lt;!&ndash;2つ目のお題&ndash;&gt;-->
-<!--            GW-->
-<!--            <div class="expandable-content">-->
-<!--                <ons-card>-->
-<!--                    <div class="first_line">-->
-<!--                        ああつくし-->
-<!--                    </div>-->
-
-<!--                    <div class="second_line">-->
-<!--                        つくしだいすき-->
-<!--                    </div>-->
-
-<!--                    <div class="third_line">-->
-<!--                        ああつくし-->
-<!--                    </div>-->
-
-<!--                    <div class="post_date">-->
-<!--                        投稿日時 5/19 12:00-->
-<!--                    </div>-->
-
-<!--                    <div class="post_date">-->
-<!--                        投稿日時 5/19 12:00-->
-<!--                    </div>-->
-<!--                </ons-card>-->
-
-<!--                &lt;!&ndash;2つ目の俳句&ndash;&gt;-->
-<!--                <ons-card>-->
-<!--                    <div class="first_line">-->
-<!--                        ああつくし-->
-<!--                    </div>-->
-
-<!--                    <div class="second_line">-->
-<!--                        つくしだいすき-->
-<!--                    </div>-->
-
-<!--                    <div class="third_line">-->
-<!--                        つくしすき-->
-<!--                    </div>-->
-
-<!--                    <div class="post_date">-->
-<!--                        投稿日時 5/19 12:00-->
-<!--                    </div>-->
-<!--                </ons-card>-->
-<!--            </div>-->
-<!--        </ons-list-item>-->
+        <div id="expandable_contents">
+        </div>
 
     </ons-list>
+
+    <script>
+        $(function () {
+            var awardArray = ['金賞', '銀賞', '銅賞'];
+            var str = ""
+            for (i = 0; i < 3; i++) {
+                str += "<ons-list-item expandable>\n" +
+                    "お題\n" +
+                    "<div class=\"expandable-content\">\n"
+
+                for (j = 0; j < 3; j++) {
+                    // 賞を表示
+                    str += awardArray[j] + "\n" +
+                        "<ons-card>\n" +
+                        "<div class=\"first_line\">\n" +
+                        "ああつくし\n" +
+                        "</div>\n" +
+                        "<div class=\"second_line\">\n" +
+                        "つくしだいすき\n" +
+                        "</div>\n" +
+                        "<div class=\"third_line\">\n" +
+                        "ああつくし\n" +
+                        "</div>\n" +
+                        "<div class=\"post_date\">\n" +
+                        "投稿日時 5/19 12:00\n" +
+                        "</div>\n" +
+                        "</ons-card>"
+                }
+                str += "</div>\n" +
+                    "</ons-list-item>"
+            }
+
+            $("#expandable_contents").append(str)
+        })
+    </script>
+
 </ons-page>
