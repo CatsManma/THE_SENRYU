@@ -11,46 +11,55 @@
     <div id="homeActivity">
         <script>
             $(function () {
-                const odai_master = ncmb.DataStore("odai_master")
-                let nowThemes = []
-                odai_master.fetchAll()
+                const odai_master = ncmb.DataStore("odai_master");
+                let nowThemes = [];
+                let odaiArr = [];
+                let jsonObject
+                //開催中のお題一覧を取得する処理
+                odai_master
+                    .equalTo("isStarted", true) //開催中のものだけを取得する
+                    .order("endDate").order("startDate",true) //終了が早いものからあとから開始した順に表示させる
+                    .fetchAll()
                     .then(function (results) {
                         for (var i = 0; i < results.length; i++) { //取得した結果はレコードごとの配列になる
-                            let jsonObject = results[i]; //1レコードずつ取り出す（JSON形式）
-                            let object = JSON.stringify(jsonObject) //JSON形式から連想配列に変換
-                            alert(object); //連想配列がそのまま表示される
-
+                            jsonObject = results[i]; //1レコードずつ取り出す（JSON形式）
+                            let theme = jsonObject.theme;
+                            let startDate = jsonObject.startDate;
+                            let endDate = jsonObject.endDate;
+                            let message = "お題：" + theme + "\n" + startDate + "～" + endDate;
+                            //TODO:ここにHTMLを書き込む処理
                         }
-                    })
+                    });
             })
+
         </script>
     </div>
     <!--Nakayama_home_[end]-->
 
 
-    <!--&lt;!&ndash;最新のお題&ndash;&gt;-->
-    <!--<ons-card>-->
-    <!--<div class="theme">-->
-    <!--&lt;!&ndash;日付は変数&ndash;&gt;-->
-    <!--最新のお題 (5/19~6/1)-->
-    <!--</div>-->
+    <!--最新のお題-->
+    <ons-card>
+    <div class="theme">
+    <!--日付は変数-->
+    最新のお題 (5/19~6/1)
+    </div>
 
-    <!--<div class="content">-->
-    <!--<div class="theme_name">つくし</div>-->
-    <!--</div>-->
-    <!--</ons-card>-->
+    <div class="content">
+    <div class="theme_name">つくし</div>
+    </div>
+    </ons-card>
 
-    <!--&lt;!&ndash;前回のお題&ndash;&gt;-->
-    <!--<ons-card>-->
-    <!--<div class="theme">-->
-    <!--&lt;!&ndash;日付は変数&ndash;&gt;-->
-    <!--前回のお題 (5/5~5/18)-->
-    <!--</div>-->
+    <!--前回のお題-->
+    <ons-card>
+    <div class="theme">
+    <!--日付は変数-->
+    前回のお題 (5/5~5/18)
+    </div>
 
-    <!--<div class="content">-->
-    <!--<div class="theme_name">ゴールデンウィーク</div>-->
-    <!--<div class="theme_sub">結果発表</div>-->
-    <!--</div>-->
-    <!--</ons-card>-->
+    <div class="content">
+    <div class="theme_name">ゴールデンウィーク</div>
+    <div class="theme_sub">結果発表</div>
+    </div>
+    </ons-card>
 
 </ons-page>
