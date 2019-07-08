@@ -6,6 +6,7 @@
 .vscode/
 typings/
 node_modules
+/env.js
 /.idea/workspace.xml
 /.idea/workspace.tasks.xml
 hoge.js

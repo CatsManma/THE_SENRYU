@@ -6,108 +6,51 @@
     </ons-fab>
 
     <!--    ホーム画面のUI周り-->
-    <!--最新のお題-->
-    <ons-card>
-        <div class="theme">
-            <!--日付は変数-->
-            <!--            最新のお題 (5/19~6/1)-->
-            <div id="Latest_theme"></div>
-        </div>
 
-        <div class="content">
-            <div class="theme_name">
-                <!--                つくし-->
-                <div id="LatestTheme_name"></div>
-            </div>
-        </div>
-        <div class="theme_sub">募集中</div>
-    </ons-card>
+    <!--Nakayama_home[start]-->
+    <div id="homeActivity">
+        <script>
+            $(function () {
+                const odai_master = ncmb.DataStore("odai_master")
+                let nowThemes = []
+                odai_master.fetchAll()
+                    .then(function (results) {
+                        for (var i = 0; i < results.length; i++) { //取得した結果はレコードごとの配列になる
+                            let jsonObject = results[i]; //1レコードずつ取り出す（JSON形式）
+                            let object = JSON.stringify(jsonObject) //JSON形式から連想配列に変換
+                            alert(object); //連想配列がそのまま表示される
 
-    <!--前回のお題-->
-    <ons-card>
-        <div class="theme">
-            <!--日付は変数-->
-            前回のお題 (5/5~5/18)
-        </div>
+                        }
+                    })
+            })
+        </script>
+    </div>
+    <!--Nakayama_home_[end]-->
 
-        <div class="content">
-            <div class="theme_name">ゴールデンウィーク</div>
-            <div class="theme_sub">結果発表</div>
-        </div>
-    </ons-card>
 
-    <script>
-        $(function () {
-            // //  賞の名前を格納する配列
-            // var awardArray = ['金賞', '銀賞', '銅賞'];
-            //
-            // // 出力文を一時格納しておく
-            // var TempStr = ""
-            //
-            // // ToDo お題名を取得する処理が必要
-            // // お題の名前を格納する配列
-            // var ThemeArray = ['つくし1', 'つくし2', 'つくし3'];
-            //
-            // // ToDo ループ数はお題の数で変更する
-            // for (i = 0; i < 3; i++) {
-            //     // ToDo お題に対応する投稿の本文を取得する処理が必要
-            //     // お題に対応する投稿の本文を格納する配列
-            //     var SenryuArray = ['ああつくし つくしだいすき ああつく1', 'ああつくし つくしだいすき ああつく2', 'ああつくし つくしだいすき ああつく3']
-            //
-            //     // ToDo 投稿に対する投稿時間を取得する処理が必要
-            //     // 投稿に対する投稿時間を格納する配列
-            //     var TimeArray = ['5/19 12:01', '5/19 12:02', '5/19 12:03']
-            //
-            //     TempStr += "<ons-list-item expandable>\n" +
-            //         ThemeArray[i] + "\n" +
-            //         "<div class=\"expandable-content\">\n"
-            //
-            //     // ループ数は賞の数になるため、3固定
-            //     for (j = 0; j < 3; j++) {
-            //         var TempSenryuArray = SenryuArray[j].split((' '))
-            //         // 賞を表示
-            //         TempStr += awardArray[j] + "\n" +
-            //             "<ons-card>\n" +
-            //             "<div class=\"first_line\">\n" +
-            //             TempSenryuArray[0] + "\n" +
-            //             "</div>\n" +
-            //             "<div class=\"second_line\">\n" +
-            //             TempSenryuArray[1] + "\n" +
-            //             "</div>\n" +
-            //             "<div class=\"third_line\">\n" +
-            //             TempSenryuArray[2] + "\n" +
-            //             "</div>\n" +
-            //             "<div class=\"post_date\">\n" +
-            //             "投稿日時 " + TimeArray[j] + "\n" +
-            //             "</div>\n" +
-            //             "</ons-card>"
-            //     }
-            //     TempStr += "</div>\n" +
-            //         "</ons-list-item>"
-            // }
-            // $("#expandable_contents").append(TempStr)
+    <!--&lt;!&ndash;最新のお題&ndash;&gt;-->
+    <!--<ons-card>-->
+    <!--<div class="theme">-->
+    <!--&lt;!&ndash;日付は変数&ndash;&gt;-->
+    <!--最新のお題 (5/19~6/1)-->
+    <!--</div>-->
 
-            // ToDo 最新のお題の期間を取得
-            // 最新のお題の期間
-            var LatestDate = '(5/19~6/1)'
-            $("#Latest_theme").append('最新のお題' + LatestDate)
+    <!--<div class="content">-->
+    <!--<div class="theme_name">つくし</div>-->
+    <!--</div>-->
+    <!--</ons-card>-->
 
-            // ToDo 最新のお題名を取得
-            // 最新のお題名
-            var LatestOdaiName = 'つくし'
-            $("#LatestTheme_name").append(LatestOdaiName)
+    <!--&lt;!&ndash;前回のお題&ndash;&gt;-->
+    <!--<ons-card>-->
+    <!--<div class="theme">-->
+    <!--&lt;!&ndash;日付は変数&ndash;&gt;-->
+    <!--前回のお題 (5/5~5/18)-->
+    <!--</div>-->
 
-            // ToDo 最新のお題の期間を取得
-            // 最新のお題の期間
-            var NewestDate = '(5/19~6/1)'
-            $(".new_theme").append('最新のお題' + NewestDate)
-
-            // ToDo 最新のお題名を取得
-            // 最新のお題名
-            var NewestOdaiName = 'つくし'
-            $(".theme_id").append(NewestOdaiName)
-
-        })
-    </script>
+    <!--<div class="content">-->
+    <!--<div class="theme_name">ゴールデンウィーク</div>-->
+    <!--<div class="theme_sub">結果発表</div>-->
+    <!--</div>-->
+    <!--</ons-card>-->
 
 </ons-page>
