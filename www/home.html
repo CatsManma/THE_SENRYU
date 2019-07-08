@@ -12,13 +12,14 @@
         <script>
             $(function () {
                 const odai_master = ncmb.DataStore("odai_master")
-                let nowThemes = []
-                odai_master.fetchAll()
+                odai_master
+                    .equalTo("isStarted",true)
+                    .fetchAll()
                     .then(function (results) {
                         for (var i = 0; i < results.length; i++) { //取得した結果はレコードごとの配列になる
                             let jsonObject = results[i]; //1レコードずつ取り出す（JSON形式）
                             let object = JSON.stringify(jsonObject) //JSON形式から連想配列に変換
-                            alert(object); //連想配列がそのまま表示される
+                            // alert(object); //連想配列がそのまま表示される
 
                         }
                     })

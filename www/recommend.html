@@ -20,11 +20,34 @@
             var awardArray = ['金賞', '銀賞', '銅賞'];
 
             // 出力文を一時格納しておく
-            var TempStr = ""
+            var TempStr = "";
+            const odai_master = ncmb.DataStore("odai_master");
+            const user_master = ncmb.DataStore("user_master");
+            var themeArray = [];
+            var odaiList = [];
+            odai_master
+                .fetchAll()
+                .then(function (odai) {
+                    for(var i=0;i<odai.length;i++){
+                        odaiList.push(odai[i].odaiId);
+                        themeArray.push(odai[i].theme);
+                    }
+                });
+            user_master
+                .fetchAll()
+                .then(function(user){
+                    for (var i = 0; i < odaiList.length; i++) {
+                        for(var j=0;j<user.length;j++) {
+                            var senryuPosts = user[j].senryuPosts;
+                            var SenryuArray = senryuPosts.filter(senryu => senryu.odai == odaiList[i]);
+                            alert(JSON.stringify(SenryuArray))
+                        }
+                    }
+                })
 
             // ToDo お題名を取得する処理が必要
             // お題の名前を格納する配列
-            var ThemeArray = ['つくし1', 'つくし2', 'つくし3'];
+            // var ThemeArray = ['つくし1', 'つくし2', 'つくし3'];
 
             // ToDo ループ数はお題の数で変更する
             for (i = 0; i < 3; i++) {
