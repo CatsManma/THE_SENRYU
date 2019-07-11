@@ -13,10 +13,27 @@
             最新のお題 (5/19~6/1)
         </div>
 
-        <div class="content">
-            <div class="theme_name">つくし</div>
-        </div>
-    </ons-card>
+    <!--Nakayama_home[start]-->
+    <div id="homeActivity">
+        <script>
+            $(function () {
+                const odai_master = ncmb.DataStore("odai_master")
+                odai_master
+                    .equalTo("isStarted",true)
+                    .fetchAll()
+                    .then(function (results) {
+                        for (var i = 0; i < results.length; i++) { //取得した結果はレコードごとの配列になる
+                            let jsonObject = results[i]; //1レコードずつ取り出す（JSON形式）
+                            let object = JSON.stringify(jsonObject) //JSON形式から連想配列に変換
+                            // alert(object); //連想配列がそのまま表示される
+
+                        }
+                    })
+            })
+        </script>
+    </div>
+    <!--Nakayama_home_[end]-->
+
 
     <!--前回のお題-->
     <ons-card>

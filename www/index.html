@@ -16,18 +16,28 @@
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
 
+
+
+
     <!--    OnsenUIのインポート-->
     <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
-    <!--    jQueryのインポート-->
+    <!--jQueryのインポート-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <!--jsの読み込み?-->
+
+    <!--NCMB用のAPP_KEY,CLI_KEYの読み込み-->
+    <script src="../env.js"></script>
+    <script>
+        var ncmb = new NCMB(APP_KEY, CLI_KEY); //ncmbにキーを渡してインスタンスを生成
+    </script>
+
     <script src="js/index.js"></script>
+
+
 
     <title>index.html</title>
 
 </head>
 <body>
-
 <ons-page>
     <ons-toolbar>
         <div class="center">THE 川柳 2019</div>
