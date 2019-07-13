@@ -16,78 +16,77 @@
     </ons-list>
     <script>
         $(function () {
-            //  賞の名前を格納する配列
-            var awardArray = ['金賞', '銀賞', '銅賞'];
 
             // 出力文を一時格納しておく
             var TempStr = "";
             const odai_master = ncmb.DataStore("odai_master");
-            const user_master = ncmb.DataStore("user_master");
+            const post_master = ncmb.DataStore("post_master");
+            var odaiPosts = {};
             var themeArray = [];
-            var odaiList = [];
+            var odaiIdList = [];
             odai_master
+                .order("endDate", true).order("startDate")
                 .fetchAll()
-                .then(function (odai) {
-                    for(var i=0;i<odai.length;i++){
-                        odaiList.push(odai[i].odaiId);
-                        themeArray.push(odai[i].theme);
+                .then(function (odai) { //odaiPostsにお題を詰めていく
+                    for (var i = 0; i < odai.length; i++) {
+                        odaiPosts[odai[i].odaiId] = {"theme": odai[i].theme};
                     }
                 });
-            user_master
+
+            post_master
+                .order("odaiId")
+                .lessThanOrEqualTo("rank", 3)
+                .order("rank")
                 .fetchAll()
-                .then(function(user){
-                    for (var i = 0; i < odaiList.length; i++) {
-                        for(var j=0;j<user.length;j++) {
-                            var senryuPosts = user[j].senryuPosts;
-                            var SenryuArray = senryuPosts.filter(senryu => senryu.odai == odaiList[i]);
-                            alert(JSON.stringify(SenryuArray))
+                .then(function (post) {
+                    for (var i = 0; i < post.length; i++) {
+
+                        switch (post[i].rank - 1) {
+                            case 0:
+                                odaiPosts[post[i].odaiId].金賞 = {senryu: post[i].senryu, postdate: post[i].createDate};
+                                break;
+                            case 1:
+                                odaiPosts[post[i].odaiId].銀賞 = {senryu: post[i].senryu, postdate: post[i].createDate};
+                                break;
+                            case 2:
+                                odaiPosts[post[i].odaiId].銅賞 = {senryu: post[i].senryu, postdate: post[i].createDate};
+                                break;
                         }
                     }
-                })
+                    /////////////////////ここから表示
+                    Object.keys(odaiPosts).forEach(function (values) {
+                        // alert(JSON.stringify(this[values]));
+                        var odaiPost = this[values];
+                        var theme = odaiPost.theme;
+                        var rArr = ["金賞", "銀賞", "銅賞"];
+                        var posts = [odaiPost["金賞"], odaiPost["銀賞"], odaiPost["銅賞"]];
+                        var tempStr = `<ons-list-item expandable>\n ${theme} \n<div class='expandable-content'>\n`;
+                        for (j = 0; j < 3; j++) { //各お題の金賞銀賞銅賞を表示する
+                            if (posts[j] == null) {
+                                tempStr += `${rArr[j]}<ons-card>ごめんけどないよ</ons-card>`;
+                                continue
+                            }
+                            var senryu = posts[j].senryu.split((' ')); //川柳を配列に取得
+                            var postdate = new Date(posts[j].postdate);
+                            var year = postdate.getFullYear();
+                            var month = (" " + (postdate.getMonth() + 1)).slice(-2);
+                            var date = (" " + postdate.getDate()).slice(-2);
+                            var hour = ("0" + postdate.getHours()).slice(-2);
+                            var min = ("0" + postdate.getMinutes()).slice(-2);
 
-            // ToDo お題名を取得する処理が必要
-            // お題の名前を格納する配列
-            // var ThemeArray = ['つくし1', 'つくし2', 'つくし3'];
+                            tempStr += `${rArr[j]}\n<ons-card>\n` +
+                                `<div class="first_line">\n${senryu[0]}\n</div>\n` +
+                                `<div class="second_line">\n${senryu[1]}\n</div>\n` +
+                                `<div class="third_line">\n${senryu[2]}\n</div>\n` +
+                                `<div class="post_date">\n投稿日:${year}年${month}月${date}日 ${hour}:${min}\n</div>\n` +
+                                `</ons-card>`;
+                        }
+                        tempStr += "</div>\n</ons-list-item>";
+                        $("#expandable_contents").append(tempStr)
 
-            // ToDo ループ数はお題の数で変更する
-            for (i = 0; i < 3; i++) {
-                // ToDo お題に対応する投稿の本文を取得する処理が必要
-                // お題に対応する投稿の本文を格納する配列
-                var SenryuArray = ['ああつくし つくしだいすき ああつく1', 'ああつくし つくしだいすき ああつく2', 'ああつくし つくしだいすき ああつく3']
-
-                // ToDo 投稿に対する投稿時間を取得する処理が必要
-                // 投稿に対する投稿時間を格納する配列
-                var TimeArray = ['5/19 12:01', '5/19 12:02', '5/19 12:03']
-
-                TempStr += "<ons-list-item expandable>\n" +
-                    ThemeArray[i] + "\n" +
-                    "<div class=\"expandable-content\">\n"
-
-                // ループ数は賞の数になるため、3固定
-                for (j = 0; j < 3; j++) {
-                    var TempSenryuArray = SenryuArray[j].split((' '))
-                    // 賞を表示
-                    TempStr += awardArray[j] + "\n" +
-                        "<ons-card>\n" +
-                        "<div class=\"first_line\">\n" +
-                        TempSenryuArray[0] + "\n" +
-                        "</div>\n" +
-                        "<div class=\"second_line\">\n" +
-                        TempSenryuArray[1] + "\n" +
-                        "</div>\n" +
-                        "<div class=\"third_line\">\n" +
-                        TempSenryuArray[2] + "\n" +
-                        "</div>\n" +
-                        "<div class=\"post_date\">\n" +
-                        "投稿日時 " + TimeArray[j] + "\n" +
-                        "</div>\n" +
-                        "</ons-card>"
-                }
-                TempStr += "</div>\n" +
-                    "</ons-list-item>"
-            }
-            $("#expandable_contents").append(TempStr)
-        })
+                    }, odaiPosts)
+                });
+        });
     </script>
 
 </ons-page>
