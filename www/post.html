@@ -1,13 +1,37 @@
-<ons-page>
+<ons-page id="post">
+
+    <ons-toolbar>
+        <div class="center">THE 川柳 2019</div>
+    </ons-toolbar>
+
+    <ons-card>
+        <div class="theme">
+            <!--日付は変数-->
+            お題 (5/5~5/18)
+        </div>
+
+        <div class="content">
+            <div class="theme_name">つくし</div>
+        </div>
+
+    </ons-card>
+
     <div style="text-align: center; margin-top: 30px;">
         <p>
             <ons-input id="username" modifier="underbar" placeholder="一行目(五文字)" max="5" min="5" float></ons-input>
         </p>
         <p>
-            <ons-input id="password" modifier="underbar" type="password" placeholder="Password" float></ons-input>
+            <ons-input id="username" modifier="underbar" placeholder="二行目(７文字)" max="7" min="7" float></ons-input>
+        </p>
+        <p>
+            <ons-input id="username" modifier="underbar" placeholder="三行目(五文字)" max="5" min="5" float></ons-input>
         </p>
         <p style="margin-top: 30px;">
-            <ons-button onclick="login()">Sign in</ons-button>
+            <ons-button id="post-button">投句</ons-button>
+        </p>
+        <p style="margin-top: 30px;">
+            <ons-button onClick="myNavigator.popPage()">前の画面に戻る</ons-button>
         </p>
     </div>
+
 </ons-page>
