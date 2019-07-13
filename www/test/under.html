@@ -1,0 +1,18 @@
+<ons-page>
+    <ons-toolbar>
+        <div class="left">
+            <ons-back-button>戻る</ons-back-button>
+        </div>
+        <div class="center">下層ページ</div>
+    </ons-toolbar>
+    <div class="contents">
+        <ons-list>
+            <ons-list-header>popPage()</ons-list-header>
+            <ons-list-item modifier="chevron" ng-click="myNavigator.popPage({animation: 'slide'})">slide</ons-list-item>
+            <ons-list-item modifier="chevron" ng-click="myNavigator.popPage({animation: 'lift'})">lift</ons-list-item>
+            <ons-list-item modifier="chevron" ng-click="myNavigator.popPage({animation: 'fade'})">fade</ons-list-item>
+            <ons-list-item modifier="chevron" ng-click="myNavigator.popPage({animation: 'none'})">none</ons-list-item>
+            <ons-list-item modifier="chevron" ng-click="myNavigator.popPage({onTransitionEnd: console.log('popPageコールバック')})">callback</ons-list-item>
+        </ons-list>
+    </div>
+</ons-page>

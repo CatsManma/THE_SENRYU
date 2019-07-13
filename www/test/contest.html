@@ -1,0 +1,55 @@
+<ons-page id="contest">
+    <p class="Contest_Theme" style="text-align: center;">
+        募集中のお題
+    </p>
+
+    <!--  右下に筆のアイコンを表示  -->
+    <ons-fab position="bottom right" id="push-button">
+        <ons-icon icon="fa-paint-brush"></ons-icon>
+    </ons-fab>
+
+    <div class="Contest_Main">
+    </div>
+
+    <script>
+        // Todo 募集中のお題を取得する処理が必要
+        var ContestTheme = "つくし"
+        // Todo 募集中のお題の開催期間を取得する処理が必要
+        ContestTheme += "(" + "日付" + ")"
+        $(".Contest_Theme").append(ContestTheme)
+
+        // ToDo お題に対応する投稿の本文を取得する処理が必要
+        // お題に対応する投稿の本文を格納する配列
+        var SenryuArray = ['ああつくし つくしだいすき ああつく1', 'ああつくし つくしだいすき ああつく2', 'ああつくし つくしだいすき ああつく3']
+
+        // ToDo 投稿に対する投稿時間を取得する処理が必要
+        // 投稿に対する投稿時間を格納する配列
+        var TimeArray = ['5/19 12:01', '5/19 12:02', '5/19 12:03']
+
+        var TempStr = ""
+
+        // ToDo 取得した投稿数に応じてループを行なう
+        var loop = SenryuArray.length
+
+        for (i = 0; i < loop; i++) {
+            var TempSenryuArray = SenryuArray[i].split((' '))
+            // 賞を表示
+            TempStr += "<ons-card>\n" +
+                "<div class=\"first_line\">\n" +
+                TempSenryuArray[0] + "\n" +
+                "</div>\n" +
+                "<div class=\"second_line\">\n" +
+                TempSenryuArray[1] + "\n" +
+                "</div>\n" +
+                "<div class=\"third_line\">\n" +
+                TempSenryuArray[2] + "\n" +
+                "</div>\n" +
+                "<div class=\"post_date\">\n" +
+                "投稿日時 " + TimeArray[i] + "\n" +
+                "</div>\n" +
+                "</ons-card>"
+        }
+        $(".Contest_Main").append(TempStr)
+    </script>
+
+</ons-page>
