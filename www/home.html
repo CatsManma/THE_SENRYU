@@ -6,7 +6,6 @@
     </ons-fab>
 
     <!--    ホーム画面のUI周り-->
-
     <!--Nakayama_home[start]-->
     <div id="homeActivity">
         <script>
@@ -14,52 +13,58 @@
                 const odai_master = ncmb.DataStore("odai_master");
                 let nowThemes = [];
                 let odaiArr = [];
-                let jsonObject
+                let jsonObject;
+                var homeHtml = ""; //書き込むHTML
                 //開催中のお題一覧を取得する処理
-                odai_master
-                    .equalTo("isStarted", true) //開催中のものだけを取得する
-                    .order("endDate").order("startDate",true) //終了が早いものからあとから開始した順に表示させる
-                    .fetchAll()
-                    .then(function (results) {
-                        for (var i = 0; i < results.length; i++) { //取得した結果はレコードごとの配列になる
-                            jsonObject = results[i]; //1レコードずつ取り出す（JSON形式）
-                            let theme = jsonObject.theme;
-                            let startDate = jsonObject.startDate;
-                            let endDate = jsonObject.endDate;
-                            let message = "お題：" + theme + "\n" + startDate + "～" + endDate;
-                            //TODO:ここにHTMLを書き込む処理
-                        }
-                    });
-            })
+                kaisaityu();
 
+                //開催中のお題を取得する
+                function kaisaityu() {
+                    odai_master
+                        .equalTo("isStarted", true) //開催中のものだけを取得する
+                        .order("endDate").order("startDate", true) //終了が早いものからあとから開始した順に表示させる
+                        .fetchAll()
+                        .then(function (results) {
+                            homeHtml += "<ons-card>開催中のお題";
+                            for (var i = 0; i < results.length; i++) { //取得した結果はレコードごとの配列になる
+                                jsonObject = results[i]; //1レコードずつ取り出す（JSON形式）
+                                let theme = jsonObject.theme;
+                                let startDate = jsonObject.startDate;
+                                let endDate = jsonObject.endDate;
+                                let message = "お題：" + theme + "\n" + startDate + "～" + endDate;
+
+                                homeHtml += `<ons-card><div class="theme">開催期間 (${startDate}~${endDate})</div>` +
+                                    `<div class="content"><div class="theme_name">${theme}</div></div></ons-card>`;
+                            }
+                            homeHtml += "</ons-card>";
+                            saikin() //次に最近のやつを取得する
+                        });
+                }
+                //直近のお題を取得する
+                function saikin() {
+                    odai_master
+                        .equalTo("isStarted", false) //開催中のものだけを取得する
+                        .order("endDate", true).order("startDate", true) //終了が早いものからあとから開始した順に表示させる
+                        .limit(2)
+                        .fetchAll()
+                        .then(function (results) {
+                                homeHtml += "<ons-card>最近のお題";
+                                for (var i = 0; i < results.length; i++) { //取得した結果はレコードごとの配列になる
+                                    jsonObject = results[i]; //1レコードずつ取り出す（JSON形式）
+                                    let theme = jsonObject.theme;
+                                    let startDate = jsonObject.startDate;
+                                    let endDate = jsonObject.endDate;
+                                    let message = "お題：" + theme + "\n" + startDate + "～" + endDate;
+
+                                    homeHtml += `<ons-card><div class="theme">開催期間 (${startDate}~${endDate})</div>` +
+                                        `<div class="content"><div class="theme_name">${theme}</div></div><div class="theme_sub">結果発表</div></ons-card>`;
+                                }
+                                homeHtml += "</ons-card>";
+                                $("#homeActivity").append(homeHtml);
+                            }
+                        );
+                }
+            })
         </script>
     </div>
-    <!--Nakayama_home_[end]-->
-
-
-    <!--最新のお題-->
-    <ons-card>
-    <div class="theme">
-    <!--日付は変数-->
-    最新のお題 (5/19~6/1)
-    </div>
-
-    <div class="content">
-    <div class="theme_name">つくし</div>
-    </div>
-    </ons-card>
-
-    <!--前回のお題-->
-    <ons-card>
-    <div class="theme">
-    <!--日付は変数-->
-    前回のお題 (5/5~5/18)
-    </div>
-
-    <div class="content">
-    <div class="theme_name">ゴールデンウィーク</div>
-    <div class="theme_sub">結果発表</div>
-    </div>
-    </ons-card>
-
 </ons-page>
