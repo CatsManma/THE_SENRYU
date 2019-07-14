@@ -5,16 +5,10 @@
     </ons-toolbar>
 
     <ons-card>
-        <div class="theme">
-            <!--日付は変数-->
-            お題<!--お題(5/5~5/18)-->
-        </div>
+        <!--日付は変数-->
+        <div class="POST_theme">お題<!--お題(5/5~5/18)--></div>
 
-        <div class="content">
-            <div class="theme_name">
-                <!--つくし-->
-            </div>
-        </div>
+        <div class="POST_theme_name"><!--つくし--></div>
 
     </ons-card>
 
@@ -43,12 +37,12 @@
         Odai_Period += "5/5~5/18";
         Odai_Period += ")";
 
-        $(".theme").append(Odai_Period);
+        $(".POST_theme").append(Odai_Period);
 
 
         // ToDo お題名を取得する処理が必要
         Odai_Name = "つくし";
-        $(".theme_name").append(Odai_Name);
+        $(".POST_theme_name").append(Odai_Name);
 
 
         // 投句ボタンを押されたときの処理
@@ -65,11 +59,18 @@
             var pattern7 = /^[あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんぁぃぅぇぉゃゅょっ]{7}$/g;
 
             if (array[0].match(pattern5) != null && array[1].match(pattern7) != null && array[2].match(pattern5) != null) {
-                ons.notification.alert('Congratulations!' + array);
+                // Todo 正しく575で書かれていた場合の処理を書く
+
+                // 投句に成功した場合に実行するalert
+                ons.notification.alert('Congratulations!' + array + "で投句しました!!");
+
+                // 投句処理を終えたら前のページへpopする
+                myNavigator.popPage()
+
             } else {
+                // Todo 575で書かれていなかった場合の処理を書く
                 ons.notification.alert("正しい文字数で入力してください!!");
             }
-
         };
 
     </script>
