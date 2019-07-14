@@ -7,30 +7,71 @@
     <ons-card>
         <div class="theme">
             <!--日付は変数-->
-            お題 (5/5~5/18)
+            お題<!--お題(5/5~5/18)-->
         </div>
 
         <div class="content">
-            <div class="theme_name">つくし</div>
+            <div class="theme_name">
+                <!--つくし-->
+            </div>
         </div>
 
     </ons-card>
 
     <div style="text-align: center; margin-top: 30px;">
         <p>
-            <ons-input id="username" modifier="underbar" placeholder="一行目(五文字)" max="5" min="5" float></ons-input>
+            <ons-input id="SenryuLine_1" modifier="underbar" placeholder="一行目(五文字)" max="5" min="5" float></ons-input>
         </p>
         <p>
-            <ons-input id="username" modifier="underbar" placeholder="二行目(７文字)" max="7" min="7" float></ons-input>
+            <ons-input id="SenryuLine_2" modifier="underbar" placeholder="二行目(７文字)" max="7" min="7" float></ons-input>
         </p>
         <p>
-            <ons-input id="username" modifier="underbar" placeholder="三行目(五文字)" max="5" min="5" float></ons-input>
+            <ons-input id="SenryuLine_3" modifier="underbar" placeholder="三行目(五文字)" max="5" min="5" float></ons-input>
         </p>
         <p style="margin-top: 30px;">
-            <ons-button id="post-button">投句</ons-button>
+            <ons-button onclick="Post_Senryu()">投句</ons-button>
         </p>
         <p style="margin-top: 30px;">
             <ons-button onClick="myNavigator.popPage()">前の画面に戻る</ons-button>
         </p>
     </div>
+
+    <script>
+        // ToDo お題の開催期間を取得する処理が必要
+        // ToDo これいる????
+        Odai_Period = "(";
+        Odai_Period += "5/5~5/18";
+        Odai_Period += ")";
+
+        $(".theme").append(Odai_Period);
+
+
+        // ToDo お題名を取得する処理が必要
+        Odai_Name = "つくし";
+        $(".theme_name").append(Odai_Name);
+
+
+        // 投句ボタンを押されたときの処理
+        var Post_Senryu = function () {
+            var array = [];
+            array.push(document.getElementById('SenryuLine_1').value);
+            array.push(document.getElementById('SenryuLine_2').value);
+            array.push(document.getElementById('SenryuLine_3').value);
+
+            console.log("arrayの中身" + array)
+
+            // ons.notification.alert('Congratulations!' + array);
+            var pattern5 = /^[あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんぁぃぅぇぉゃゅょっ]{5}$/g;
+            var pattern7 = /^[あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんぁぃぅぇぉゃゅょっ]{7}$/g;
+
+            if (array[0].match(pattern5) != null && array[1].match(pattern7) != null && array[2].match(pattern5) != null) {
+                ons.notification.alert('Congratulations!' + array);
+            } else {
+                ons.notification.alert("正しい文字数で入力してください!!");
+            }
+
+        };
+
+    </script>
+
 </ons-page>
