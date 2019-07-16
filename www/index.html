@@ -31,7 +31,19 @@
     </script>
 
     <script src="js/index.js"></script>
+    <script>
+        //各テーブルを取得する処理
+        const odai_master = ncmb.DataStore("odai_master");
+        const post_master = ncmb.DataStore("post_master");
+        const class_master = ncmb.DataStore("class_master");
+        const user_master = ncmb.DataStore("user_master");
 
+        //userIdを取得する処理
+        // var userId = localStorage.getItem("userId")
+        // TODO:とりあえずテスト用に1を設定
+        var userId = 1
+
+    </script>
 
 
     <title>index.html</title>
