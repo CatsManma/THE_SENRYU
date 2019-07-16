@@ -2,7 +2,6 @@
     <p style="text-align: center;">
         過去のランキング上位
     </p>
-
     <!--  右下に筆のアイコンを表示  -->
     <ons-fab position="bottom right">
         <ons-icon icon="fa-paint-brush"></ons-icon>
@@ -15,40 +14,96 @@
         </div>
 
     </ons-list>
-
     <script>
         $(function () {
-            var awardArray = ['金賞', '銀賞', '銅賞'];
-            var str = ""
-            for (i = 0; i < 3; i++) {
-                str += "<ons-list-item expandable>\n" +
-                    "お題\n" +
-                    "<div class=\"expandable-content\">\n"
-
-                for (j = 0; j < 3; j++) {
-                    // 賞を表示
-                    str += awardArray[j] + "\n" +
-                        "<ons-card>\n" +
-                        "<div class=\"first_line\">\n" +
-                        "ああつくし\n" +
-                        "</div>\n" +
-                        "<div class=\"second_line\">\n" +
-                        "つくしだいすき\n" +
-                        "</div>\n" +
-                        "<div class=\"third_line\">\n" +
-                        "ああつくし\n" +
-                        "</div>\n" +
-                        "<div class=\"post_date\">\n" +
-                        "投稿日時 5/19 12:00\n" +
-                        "</div>\n" +
-                        "</ons-card>"
-                }
-                str += "</div>\n" +
-                    "</ons-list-item>"
+            // 出力文を一時格納しておく
+            var TempStr = "";
+            const odai_master = ncmb.DataStore("odai_master");
+            const post_master = ncmb.DataStore("post_master");
+            var odaiPosts = {};
+            var themeArray = [];
+            var odaiIdList = [];
+            getRecommendTheme();
+            function getRecommendTheme() {
+                odai_master
+                    .order("endDate", true).order("startDate")
+                    .fetchAll()
+                    .then(function (odai) { //odaiPostsにお題を詰めていく
+                        for (var i = 0; i < odai.length; i++) {
+                            var startDate = odai[i].startDate;
+                            var endDate = odai[i].endDate;
+                            odaiPosts[odai[i].odaiId] = {"theme": odai[i].theme+" （"+startDate+"～"+endDate+"）"};
+                        }
+                        getRecommendRank()
+                    });
             }
 
-            $("#expandable_contents").append(str)
-        })
+
+            function getRecommendRank() {
+                post_master
+                    .order("odaiId")
+                    .lessThanOrEqualTo("rank", 3)
+                    .order("rank")
+                    .fetchAll()
+                    .then(function (post) {
+                        for (var i = 0; i < post.length; i++) {
+
+                            switch (post[i].rank - 1) {
+                                case 0:
+                                    odaiPosts[post[i].odaiId].金賞 = {
+                                        senryu: post[i].senryu,
+                                        postdate: post[i].createDate
+                                    };
+                                    break;
+                                case 1:
+                                    odaiPosts[post[i].odaiId].銀賞 = {
+                                        senryu: post[i].senryu,
+                                        postdate: post[i].createDate
+                                    };
+                                    break;
+                                case 2:
+                                    odaiPosts[post[i].odaiId].銅賞 = {
+                                        senryu: post[i].senryu,
+                                        postdate: post[i].createDate
+                                    };
+                                    break;
+                            }
+                        }
+                        /////////////////////ここから表示
+                        Object.keys(odaiPosts).forEach(function (values) {
+                            // alert(JSON.stringify(this[values]));
+                            var odaiPost = this[values];
+                            var theme = odaiPost.theme;
+                            var rArr = ["金賞", "銀賞", "銅賞"];
+                            var posts = [odaiPost["金賞"], odaiPost["銀賞"], odaiPost["銅賞"]];
+                            var tempStr = `<ons-list-item expandable>\n ${theme} \n<div class='expandable-content'>\n`;
+                            for (j = 0; j < 3; j++) { //各お題の金賞銀賞銅賞を表示する
+                                if (posts[j] == null) {
+                                    tempStr += `${rArr[j]}<ons-card>ごめんけどないよ</ons-card>`;
+                                    continue
+                                }
+                                var senryu = posts[j].senryu.split((' ')); //川柳を配列に取得
+                                var postdate = new Date(posts[j].postdate);
+                                var year = postdate.getFullYear();
+                                var month = (" " + (postdate.getMonth() + 1)).slice(-2);
+                                var date = (" " + postdate.getDate()).slice(-2);
+                                var hour = ("0" + postdate.getHours()).slice(-2);
+                                var min = ("0" + postdate.getMinutes()).slice(-2);
+
+                                tempStr += `${rArr[j]}\n<ons-card>\n` +
+                                    `<div class="first_line">\n${senryu[0]}\n</div>\n` +
+                                    `<div class="second_line">\n${senryu[1]}\n</div>\n` +
+                                    `<div class="third_line">\n${senryu[2]}\n</div>\n` +
+                                    `<div class="post_date">\n投稿日:${year}年${month}月${date}日 ${hour}:${min}\n</div>\n` +
+                                    `</ons-card>`;
+                            }
+                            tempStr += "</div>\n</ons-list-item>";
+                            $("#expandable_contents").append(tempStr)
+
+                        }, odaiPosts)
+                    });
+            }
+        });
     </script>
 
 </ons-page>
