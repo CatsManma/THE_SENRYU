@@ -1,53 +1,44 @@
 <ons-page id="favorite">
-
     <!--  右下に筆のアイコンを表示  -->
     <ons-fab position="bottom right" id="push-button">
         <ons-icon icon="fa-paint-brush"></ons-icon>
     </ons-fab>
 
-    <div id="favorite_main">
-    </div>
-
+    <div id=favorite_content></div>
     <script>
         $(function () {
-            var str = ""
-            var TempArray = []
-            var TempStr = []
-            var ThemeArray = ['TSUKUSHI', 'GW', 'TOILET'];
-            var TSUKUSHIArray = ['つく1-1 つくしつ1-2 つく1-3', 'つく2-1 つくしつ2-2 つく2-3', 'つく3-1 つくしつ3-2 つく3-3'];
-            var GWArray = ['GWG1-1 つくしつ1-2 つく1-3', 'GWし2-1 つくしつ2-2 つく2-3'];
-            var TOILETArray = ['TO1-1 つくしつ1-2 つく1-3'];
-            var SenryuArray = [TSUKUSHIArray, GWArray, TOILETArray];
+            var favorite_str = "";
 
-            // お題の数だけループする
-            for (i = 0; i < ThemeArray.length; i++) {
-                TempArray = SenryuArray[i]
-                str += "<p style=\"text-align: center;\">\n" +
-                    "お題" + ThemeArray[i] + "\n" +
-                    "</p>";
+            post_master
+                .equalTo("favoriter", userId)
+                .order("createDate")
+                .fetchAll()
+                .then(function (favorites) {
+                    //fav一覧をmyFavoritesに詰め込んでいく
+                    for (var i in favorites) {
+                        var senryu = favorites[i].senryu.split(" ");
+                        var userName = favorites[i].userName
 
-                for (j = 0; j < SenryuArray[i].length; j++) {
-                    TempStr = TempArray[j].split(' ')
+                        var postdate = new Date(favorites[i].createDate);
+                        var year = postdate.getFullYear();
+                        var month = (" " + (postdate.getMonth() + 1)).slice(-2);
+                        var date = (" " + postdate.getDate()).slice(-2);
+                        var hour = ("0" + postdate.getHours()).slice(-2);
+                        var min = ("0" + postdate.getMinutes()).slice(-2);
 
-                    str += "<ons-card>\n" +
-                        "<div class=\"first_line\">\n" +
-                        TempStr[0] + "\n" +
-                        "</div>\n" +
-                        "<div class=\"second_line\">\n" +
-                        TempStr[1] + "\n" +
-                        "</div>\n" +
-                        "<div class=\"third_line\">\n" +
-                        TempStr[2] + "\n" +
-                        "</div>\n" +
-                        "<div class=\"post_date\">\n" +
-                        // ToDo 日付も変数にする
-                        "投稿日時 5/19 12:00\n" +
-                        "</div>\n" +
-                        "</ons-card>"
-                }
-            }
-            $("#favorite_main").append(str);
-        })
+                        favorite_str += `<ons-card>` +
+                            `<div >\n投稿者:${userName}</div>\n` +
+
+                            `<div class="first_line">${senryu[0]}</div>` +
+                            `<div class="second_line">${senryu[1]}</div>` +
+                            `<div class="third_line">${senryu[2]}</div>` +
+                            `<div class="post_date">\n投稿日:${year}年${month}月${date}日 ${hour}:${min}\n</div>\n` +
+                            `</ons-card>`
+                    }
+                    //myFavoritesを順番に表示していく
+                    $("#favorite_content").append(favorite_str)
+                });
+        });
     </script>
 
 </ons-page>

@@ -11,11 +11,9 @@
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/recommend.css">
 
-    <!--追加分-->
     <!--Onsen UIの読み込み-->
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
-
     <!--OnsenUIのインポート-->
     <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
     <!--jQueryのインポート-->
@@ -28,15 +26,25 @@
     </script>
 
     <script src="js/index.js"></script>
+    <script>
+        //各テーブルを取得する処理
+        const odai_master = ncmb.DataStore("odai_master");
+        const post_master = ncmb.DataStore("post_master");
+        const class_master = ncmb.DataStore("class_master");
+        const user_master = ncmb.DataStore("user_master");
 
+        //userIdを取得する処理
+        // var userId = localStorage.getItem("userId")
+        // TODO:とりあえずテスト用に1を設定
+        var userId = 1
+
+    </script>
     <script>
         document.addEventListener('init', function (event) {
             var page = event.target;
-
             page.querySelector('#push-button').onclick = function () {
                 document.querySelector('#myNavigator').pushPage('post.html', {data: {title: 'Post'}});
             };
-
         });
     </script>
 
