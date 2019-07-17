@@ -2,8 +2,9 @@
     <p style="text-align: center;">
         過去のランキング上位
     </p>
+
     <!--  右下に筆のアイコンを表示  -->
-    <ons-fab position="bottom right">
+    <ons-fab position="bottom right" id="push-button">
         <ons-icon icon="fa-paint-brush"></ons-icon>
     </ons-fab>
 
@@ -14,9 +15,10 @@
         </div>
 
     </ons-list>
+
     <script>
         $(function () {
-            //  賞の名前を格納する配列
+            // 賞の名前を格納する配列
             var awardArray = ['金賞', '銀賞', '銅賞'];
 
             // 出力文を一時格納しておく
@@ -49,44 +51,34 @@
             // お題の名前を格納する配列
             // var ThemeArray = ['つくし1', 'つくし2', 'つくし3'];
 
-            // ToDo ループ数はお題の数で変更する
             for (i = 0; i < 3; i++) {
-                // ToDo お題に対応する投稿の本文を取得する処理が必要
-                // お題に対応する投稿の本文を格納する配列
-                var SenryuArray = ['ああつくし つくしだいすき ああつく1', 'ああつくし つくしだいすき ああつく2', 'ああつくし つくしだいすき ああつく3']
-
-                // ToDo 投稿に対する投稿時間を取得する処理が必要
-                // 投稿に対する投稿時間を格納する配列
-                var TimeArray = ['5/19 12:01', '5/19 12:02', '5/19 12:03']
-
-                TempStr += "<ons-list-item expandable>\n" +
+                str += "<ons-list-item expandable>\n" +
                     ThemeArray[i] + "\n" +
                     "<div class=\"expandable-content\">\n"
 
-                // ループ数は賞の数になるため、3固定
                 for (j = 0; j < 3; j++) {
-                    var TempSenryuArray = SenryuArray[j].split((' '))
                     // 賞を表示
-                    TempStr += awardArray[j] + "\n" +
+                    str += awardArray[j] + "\n" +
                         "<ons-card>\n" +
                         "<div class=\"first_line\">\n" +
-                        TempSenryuArray[0] + "\n" +
+                        "ああつくし\n" +
                         "</div>\n" +
                         "<div class=\"second_line\">\n" +
-                        TempSenryuArray[1] + "\n" +
+                        "つくしだいすき\n" +
                         "</div>\n" +
                         "<div class=\"third_line\">\n" +
-                        TempSenryuArray[2] + "\n" +
+                        "ああつくし\n" +
                         "</div>\n" +
                         "<div class=\"post_date\">\n" +
-                        "投稿日時 " + TimeArray[j] + "\n" +
+                        "投稿日時 5/19 12:00\n" +
                         "</div>\n" +
                         "</ons-card>"
                 }
-                TempStr += "</div>\n" +
+                str += "</div>\n" +
                     "</ons-list-item>"
             }
-            $("#expandable_contents").append(TempStr)
+
+            $("#expandable_contents").append(str)
         })
     </script>
 

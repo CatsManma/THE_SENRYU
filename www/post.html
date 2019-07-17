@@ -1,0 +1,78 @@
+<ons-page id="post">
+
+    <ons-toolbar>
+        <div class="center">THE 川柳 2019</div>
+    </ons-toolbar>
+
+    <ons-card>
+        <!--日付は変数-->
+        <div class="POST_theme">お題<!--お題(5/5~5/18)--></div>
+
+        <div class="POST_theme_name"><!--つくし--></div>
+
+    </ons-card>
+
+    <div style="text-align: center; margin-top: 30px;">
+        <p>
+            <ons-input id="SenryuLine_1" modifier="underbar" placeholder="一行目(五文字)" max="5" min="5" float></ons-input>
+        </p>
+        <p>
+            <ons-input id="SenryuLine_2" modifier="underbar" placeholder="二行目(７文字)" max="7" min="7" float></ons-input>
+        </p>
+        <p>
+            <ons-input id="SenryuLine_3" modifier="underbar" placeholder="三行目(五文字)" max="5" min="5" float></ons-input>
+        </p>
+        <p style="margin-top: 30px;">
+            <ons-button onclick="Post_Senryu()">投句</ons-button>
+        </p>
+        <p style="margin-top: 30px;">
+            <ons-button onClick="myNavigator.popPage()">前の画面に戻る</ons-button>
+        </p>
+    </div>
+
+    <script>
+        // ToDo お題の開催期間を取得する処理が必要
+        // ToDo これいる????
+        Odai_Period = "(";
+        Odai_Period += "5/5~5/18";
+        Odai_Period += ")";
+
+        $(".POST_theme").append(Odai_Period);
+
+
+        // ToDo お題名を取得する処理が必要
+        Odai_Name = "つくし";
+        $(".POST_theme_name").append(Odai_Name);
+
+
+        // 投句ボタンを押されたときの処理
+        var Post_Senryu = function () {
+            var array = [];
+            array.push(document.getElementById('SenryuLine_1').value);
+            array.push(document.getElementById('SenryuLine_2').value);
+            array.push(document.getElementById('SenryuLine_3').value);
+
+            console.log("arrayの中身" + array)
+
+            // ons.notification.alert('Congratulations!' + array);
+            var pattern5 = /^[あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんぁぃぅぇぉゃゅょっ]{5}$/g;
+            var pattern7 = /^[あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんぁぃぅぇぉゃゅょっ]{7}$/g;
+
+            if (array[0].match(pattern5) != null && array[1].match(pattern7) != null && array[2].match(pattern5) != null) {
+                // Todo 正しく575で書かれていた場合の処理を書く
+
+                // 投句に成功した場合に実行するalert
+                ons.notification.alert('Congratulations!' + array + "で投句しました!!");
+
+                // 投句処理を終えたら前のページへpopする
+                myNavigator.popPage()
+
+            } else {
+                // Todo 575で書かれていなかった場合の処理を書く
+                ons.notification.alert("正しい文字数で入力してください!!");
+            }
+        };
+
+    </script>
+
+</ons-page>

@@ -16,10 +16,7 @@
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
 
-
-
-
-    <!--    OnsenUIのインポート-->
+    <!--OnsenUIのインポート-->
     <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
     <!--jQueryのインポート-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -32,35 +29,21 @@
 
     <script src="js/index.js"></script>
 
+    <script>
+        document.addEventListener('init', function (event) {
+            var page = event.target;
 
+            page.querySelector('#push-button').onclick = function () {
+                document.querySelector('#myNavigator').pushPage('post.html', {data: {title: 'Post'}});
+            };
 
-    <title>index.html</title>
+        });
+    </script>
 
 </head>
 <body>
 <ons-page>
-    <ons-toolbar>
-        <div class="center">THE 川柳 2019</div>
-    </ons-toolbar>
-
-    <!--    タブバー周りの設計-->
-    <ons-tabbar swipeable position="auto">
-        <ons-tab page="home.html" label="ホーム" icon="fa-home, material:md-home" active>
-        </ons-tab>
-        <ons-tab page="recommend.html" label="オススメ" icon="fa-thumbs-up">
-        </ons-tab>
-        </ons-tab>
-        <ons-tab page="contest.html" label="コンテスト" icon="fa-crown">
-        </ons-tab>
-        </ons-tab>
-        <ons-tab page="favorite.html" label="お気に入り" icon="fa-star" badge="999">
-        </ons-tab>
-        </ons-tab>
-        <ons-tab page="option.html" label="オプション" icon="fa-cog">
-        </ons-tab>
-    </ons-tabbar>
-
+    <ons-navigator swipeable id="myNavigator" page="main.html"></ons-navigator>
 </ons-page>
-
 </body>
 </html>
